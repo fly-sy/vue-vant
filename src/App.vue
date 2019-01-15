@@ -3,10 +3,10 @@
     <van-nav-bar title="长沙黑马-13期" fixed left-text="返回" left-arrow @click-left="onClickLeft"/>
 ddfdffdf
     <van-tabbar v-model="active">
-      <van-tabbar-item icon="home-o">标签</van-tabbar-item>
-      <van-tabbar-item icon="search" dot>标签</van-tabbar-item>
-      <van-tabbar-item icon="friends-o" info="5">标签</van-tabbar-item>
-      <van-tabbar-item icon="setting-o" info="20">标签</van-tabbar-item>
+      <van-tabbar-item icon="home-o">首页</van-tabbar-item>
+      <van-tabbar-item icon="user-o">会员</van-tabbar-item>
+      <van-tabbar-item icon="shopping-cart-o" info="5">购物车</van-tabbar-item>
+      <van-tabbar-item icon="search">search</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>
