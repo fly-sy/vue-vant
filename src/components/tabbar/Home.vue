@@ -12,7 +12,9 @@
 
 <script>
 import { Toast } from "vant";
-import Gird from "../../components/subcomponent/Gird";
+// 1.0 引入定义好的组件
+import Gird from "components/subcomponent/Gird";
+
 export default {
   data: () => ({
     lunbotuList: []
@@ -21,17 +23,19 @@ export default {
     this.getlunbotu();
   },
   methods: {
-    getlunbotu() {
-      this.$http.get("http://localhost:5000/api/getlunbo").then(result => {
-        if (result.status === 200) {
-          this.lunbotuList = result.data.message;
-        } else {
-          Toast("请求轮播数据失败");
-        }
-      });
+    async getlunbotu() {
+      const {
+        data: { status, message }
+      } = await this.$http.get("api/getlunbo");
+      if (status === 0) {
+        this.lunbotuList = message;
+      } else {
+        Toast("请求轮播图数据失败");
+      }
     }
   },
   components: {
+    // 2.0 注册组件
     Gird
   }
 };

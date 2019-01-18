@@ -1,47 +1,29 @@
 <template>
   <div class="gird">
     <div class="demo-icon">
-      <div class="van-col">
+      <router-link v-for="item in newslist" :key="item.id" :to="item.to" class="van-col" tag="div">
         <i class="van-icon">
-          <img src="static/gird/menu1.png" alt>
+          <img :src="item.src" alt>
         </i>
-        <span>location-o</span>
-      </div>
-      <div class="van-col">
-        <i class="van-icon">
-          <img src="static/gird/menu2.png" alt>
-        </i>
-        <span>location-o</span>
-      </div>
-      <div class="van-col">
-        <i class="van-icon">
-          <img src="static/gird/menu3.png" alt>
-        </i>
-        <span>location-o</span>
-      </div>
-      <div class="van-col">
-        <i class="van-icon">
-          <img src="static/gird/menu4.png" alt>
-        </i>
-        <span>location-o</span>
-      </div>
-      <div class="van-col">
-        <i class="van-icon">
-          <img src="static/gird/menu5.png" alt>
-        </i>
-        <span>location-o</span>
-      </div>
-      <div class="van-col">
-        <i class="van-icon">
-          <img src="static/gird/menu6.png" alt>
-        </i>
-        <span>location-o</span>
-      </div>
+        <span>{{item.title}}</span>
+      </router-link>
     </div>
   </div>
 </template>
 
 <script>
+export default {
+  data: () => ({
+    newslist: [
+      { id: 1, to: "/home/newslist", title: "新闻资讯" ,src:'static/gird/menu1.png'},
+      { id: 2, to: "/home/photolist", title: "图片分享" ,src:'static/gird/menu2.png'},
+      { id: 3, to: "/home/goodslist", title: "商品购买" ,src:'static/gird/menu3.png'},
+      { id: 4, to: "/home/newslist", title: "留言反馈" ,src:'static/gird/menu4.png'},
+      { id: 5, to: "/home/newslist", title: "视频区域" ,src:'static/gird/menu5.png'},
+      { id: 6, to: "/home/newslist", title: "联系我们" ,src:'static/gird/menu6.png'}
+    ]
+  })
+};
 </script>
 
 <style lang="less">
@@ -58,7 +40,6 @@
       float: none;
       text-align: center;
       width: 33.33333%;
-      height: 100px;
       display: inline-block;
       vertical-align: middle;
       img {

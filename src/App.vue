@@ -1,5 +1,5 @@
 <template>
-  <div class="app" id="app">
+  <div class="app">
     <van-nav-bar title="长沙黑马-13期" fixed left-text="返回" left-arrow @click-left="onClickLeft"/>
 
 
@@ -36,6 +36,7 @@ export default {
 <style lang="less">
 .app {
   padding-top: 46px;
+  padding-bottom: 50px;
   overflow-x: hidden;
 }
 

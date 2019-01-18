@@ -5,6 +5,8 @@ import Home from '../components/tabbar/Home.vue'
 import Member from '../components/tabbar/Member.vue'
 import Cart from '../components/tabbar/Cart.vue'
 import Search from '../components/tabbar/Search.vue'
+import NewsList from '../components/news/NewsList.vue'
+import NewsInfo from '../components/news/NewsInfo.vue'
 
 Vue.use(Router)
 
@@ -13,7 +15,7 @@ export default new Router({
     {
       path: '/',
       // 这里不要写成组件
-      redirect: '/home'
+      redirect: '/home/newsinfo'
     },
     {
       path: '/home',
@@ -30,6 +32,14 @@ export default new Router({
     {
       path: '/search',
       component: Search
+    },
+    {
+      path: '/home/newslist',
+      component: NewsList
+    },
+    {
+      path: '/home/newsinfo/:id',
+      component: NewsInfo
     },
   ]
 })
