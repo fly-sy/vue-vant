@@ -1,12 +1,15 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-import Home from '../components/tabbar/Home.vue'
-import Member from '../components/tabbar/Member.vue'
-import Cart from '../components/tabbar/Cart.vue'
-import Search from '../components/tabbar/Search.vue'
-import NewsList from '../components/news/NewsList.vue'
-import NewsInfo from '../components/news/NewsInfo.vue'
+import Home from '../components/tabbar/Home'
+import Member from '../components/tabbar/Member'
+import Cart from '../components/tabbar/Cart'
+import Search from '../components/tabbar/Search'
+import NewsList from '../components/news/NewsList'
+import NewsInfo from '../components/news/NewsInfo'
+import PhotoList from '../components/photos/PhotoList'
+import PhotoInfo from '../components/photos/PhotoInfo'
+import GoodsList from '../components/goods/GoodsList'
 
 Vue.use(Router)
 
@@ -40,6 +43,18 @@ export default new Router({
     {
       path: '/home/newsinfo/:id',
       component: NewsInfo
+    },
+    {
+      path: '/home/photolist',
+      component: PhotoList
+    },
+    {
+      path: '/home/photoinfo/:id',
+      component: PhotoInfo
+    },
+    {
+      path: '/home/goodslist',
+      component: GoodsList
     },
   ]
 })

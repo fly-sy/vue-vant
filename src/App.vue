@@ -1,6 +1,6 @@
 <template>
   <div class="app">
-    <van-nav-bar title="长沙黑马-13期" fixed left-text="返回" left-arrow @click-left="onClickLeft"/>
+    <van-nav-bar title="长沙黑马-13期" fixed left-text="返回" left-arrow @click-left="goBack"/>
 
 
     <transition enter-active-class="fadeInRight" leave-active-class="fadeOutLeft">
@@ -26,8 +26,8 @@ export default {
     active: 0
   }),
   methods: {
-    onClickLeft() {
-      Toast("toast");
+    goBack() {
+      this.$router.go(-1)
     }
   }
 };
