@@ -11,7 +11,7 @@
     <van-tabbar v-model="active">
       <van-tabbar-item icon="home-o" to="/home">首页</van-tabbar-item>
       <van-tabbar-item icon="user-o" to="/member">会员</van-tabbar-item>
-      <van-tabbar-item icon="shopping-cart-o" info="5" to="/cart">购物车</van-tabbar-item>
+      <van-tabbar-item icon="shopping-cart-o" info="5" to="/cart" id="cart">购物车</van-tabbar-item>
       <van-tabbar-item icon="search" to="/search">search</van-tabbar-item>
     </van-tabbar>
   </div>

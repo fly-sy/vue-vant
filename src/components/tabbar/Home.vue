@@ -1,11 +1,6 @@
 <template>
   <div class="home">
-    <van-swipe :autoplay="3000" indicator-color="white" class="demo-swipe">
-      <van-swipe-item class="item" v-for="item in lunbotuList" :key="item.img">
-        <img :src="item.img" alt>
-      </van-swipe-item>
-    </van-swipe>
-
+    <swiper :lunbotuList="lunbotuList"></swiper>
     <gird></gird>
   </div>
 </template>
@@ -14,6 +9,7 @@
 import { Toast } from "vant";
 // 1.0 引入定义好的组件
 import Gird from "components/subcomponent/Gird";
+import Swiper from "components/subcomponent/Swiper";
 
 export default {
   data: () => ({
@@ -36,7 +32,8 @@ export default {
   },
   components: {
     // 2.0 注册组件
-    Gird
+    Gird,
+    Swiper
   }
 };
 </script>

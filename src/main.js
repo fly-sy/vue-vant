@@ -4,7 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import { Button, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Card,Tab, Tabs,Lazyload } from 'vant';
+import { Button, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Card,Tab, Tabs,Lazyload ,Stepper,Panel} from 'vant';
 Vue
   .use(Button)
   .use(NavBar)
@@ -16,6 +16,8 @@ Vue
   .use(Tab)
   .use(Tabs)
   .use(Lazyload)
+  .use(Stepper)
+  .use(Panel)
 
 
 // 引入 vue-resource  
