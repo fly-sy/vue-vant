@@ -1,16 +1,15 @@
 <template>
   <div class="cart">
-    <div class="cart-group">
+    <div class="cart-group" v-for="good in goodslist" :key="good.id">
       <div class="cart-s">
         <van-switch v-model="checked"/>
       </div>
       <div class="cart-p">
-        <van-card
-          num="2"
-          price="2.00"
-          desc="描述信息"
-          title="商品标题"
-          :thumb="'http://localhost:5000/share/ithumbs/images/7.jpg'"
+        <van-card 
+          :num="2"
+          :price="good.sell_price"
+          :title="good.title"
+          :thumb="good.img_url"
         />
       </div>
     </div>
@@ -20,8 +19,31 @@
 <script>
 export default {
   data: () => ({
-    checked: true
-  })
+    checked: true,
+    goodslist: []
+  }),
+  created() {
+    this.getGoodsList();
+  },
+  methods: {
+    async getGoodsList() {
+      // 1. 获取到 store 中所有的商品的Id，然后拼接出一个 用逗号分隔的 字符串
+      var idArr = [];
+      this.$store.state.cart.forEach(item => idArr.push(item.id));
+      // 如果 购物车中没有商品，则直接返回，不需要请求数据接口，否则会报错
+      if (idArr.length <= 0) {
+        return;
+      }
+      // 获取购物车商品列表
+      const {
+        data: { status, message }
+      } = await this.$http.get("api/goods/getshopcarlist/" + idArr.join(","));
+      if (status === 0) {
+        this.goodslist = message;
+        console.log(message)
+      }
+    }
+  }
 };
 </script>
 

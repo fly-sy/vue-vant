@@ -12,7 +12,9 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
+    "lib-flexible": "^0.3.2",
     "moment": "^2.23.0",
+    "px2rem-loader": "^0.1.9",
     "vant": "^1.5.2",
     "vue": "^2.5.2",
     "vue-resource": "^1.5.1",
