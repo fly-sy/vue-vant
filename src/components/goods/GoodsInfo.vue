@@ -1,6 +1,6 @@
 <template>
   <div class="goodsinfo">
-    <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter">
+    <transition @before-enter="beforeEnter" @enter="enter" @after-enter="afterEnter"> -->
       <div class="ball" v-show="ballFlag" ref="ball"></div>
     </transition>
     <!-- 轮播区域 -->
@@ -14,9 +14,9 @@
       <div class="panel-body">
         <div class="price-group">
           市场价格:
-          <span class="old">1000</span>
+          <span class="old">{{goodsinfo.market_price}}</span>
           销售价格:
-          <span class="new">998</span>
+          <span class="new">{{goodsinfo.sell_price}}</span>
         </div>
         <div class="stepper">
           <div class="number">购买数量:</div>
@@ -25,14 +25,7 @@
             plus 点击添加的时候触发 
             minus 点击减少的时候触发  
           -->
-          <van-stepper
-            v-model="$store.state.count"
-            integer
-            class="number"
-            @plus="add(step)"
-            @minus="sub(step)"
-            :step="step"
-          />
+          <van-stepper v-model="value" integer class="number" :step="step"/>
         </div>
         <div class="btn-group">
           <van-button type="primary" size="small">立即购买</van-button>
@@ -46,9 +39,9 @@
       <h2 class="title">商品参数</h2>
       <hr>
       <div class="panel-body">
-        <p>商品货号:</p>
-        <p>库存情况:</p>
-        <p>上架时间:</p>
+        <p>商品货号：{{ goodsinfo.goods_no }}</p>
+        <p>库存情况：{{ goodsinfo.stock_quantity }}件</p>
+        <p>上架时间：{{ goodsinfo.add_time | datefmt }}</p>
       </div>
     </div>
 
@@ -65,10 +58,13 @@
 
 <script>
 import Swiper from "../subcomponent/Swiper";
+import { Toast } from "vant";
 export default {
   data: () => ({
     id: "",
+    value: 1,
     lunbotuList: [],
+    goodsinfo: {},
     step: 1,
     btnFlag: false,
     ballFlag: false,
@@ -78,6 +74,7 @@ export default {
   created() {
     this.id = this.$route.params.id;
     this.getlunbotu();
+    this.getGoodsInfo();
   },
   methods: {
     async getlunbotu() {
@@ -91,15 +88,30 @@ export default {
         this.lunbotuList = message;
       }
     },
-    add(step) {
-      this.$store.commit("add", step);
-    },
-    sub(step) {
-      this.$store.commit("sub", step);
+    async getGoodsInfo() {
+      // 获取商品的信息
+      const {
+        data: { status, message }
+      } = await this.$http.get("api/goods/getinfo/" + this.id);
+      if (status === 0) {
+        this.goodsinfo = message;
+      } else {
+        Toast("获取商品信息失败");
+      }
     },
     addToCart() {
+      var goodsinfo = {
+        id: this.id,
+        count: this.value,
+        price: this.goodsinfo.sell_price,
+        selected: true,
+        timer: null
+      };
+      // 调用 store 中的 mutations 来将商品加入购物车
+      this.$store.commit("addToCar", goodsinfo);
+
       this.ballFlag = !this.ballFlag;
-      // 按钮先禁用
+      // // 按钮先禁用
       this.btnFlag = true;
       setTimeout(() => {
         // 再次把禁用效果取消
