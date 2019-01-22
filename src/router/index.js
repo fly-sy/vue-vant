@@ -18,8 +18,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      // 这里不要写成组件
-      redirect: '/home/newsinfo'
+      redirect: '/home'
     },
     {
       path: '/home',

@@ -2,16 +2,14 @@
   <div class="app">
     <van-nav-bar title="长沙黑马-13期" fixed left-text="返回" left-arrow @click-left="goBack"/>
 
-
     <transition enter-active-class="fadeInRight" leave-active-class="fadeOutLeft">
        <router-view class="animated"></router-view>
     </transition>
 
-
     <van-tabbar v-model="active">
       <van-tabbar-item icon="home-o" to="/home">首页</van-tabbar-item>
       <van-tabbar-item icon="user-o" to="/member">会员</van-tabbar-item>
-      <van-tabbar-item icon="shopping-cart-o" info="5" to="/cart" id="cart">购物车</van-tabbar-item>
+      <van-tabbar-item icon="shopping-cart-o" :info="$store.state.count" to="/cart" id="cart">购物车</van-tabbar-item>
       <van-tabbar-item icon="search" to="/search">search</van-tabbar-item>
     </van-tabbar>
   </div>

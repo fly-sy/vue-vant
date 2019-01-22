@@ -25,7 +25,14 @@
             plus 点击添加的时候触发 
             minus 点击减少的时候触发  
           -->
-          <van-stepper v-model="step" integer class="number" @plus="add" @minus="sub"/>
+          <van-stepper
+            v-model="$store.state.count"
+            integer
+            class="number"
+            @plus="add(step)"
+            @minus="sub(step)"
+            :step="step"
+          />
         </div>
         <div class="btn-group">
           <van-button type="primary" size="small">立即购买</van-button>
@@ -60,10 +67,10 @@
 import Swiper from "../subcomponent/Swiper";
 export default {
   data: () => ({
-    btnFlag: false,
-    step: 1,
-    lunbotuList: [],
     id: "",
+    lunbotuList: [],
+    step: 1,
+    btnFlag: false,
     ballFlag: false,
     xDist: 0,
     yDist: 0
@@ -84,12 +91,18 @@ export default {
         this.lunbotuList = message;
       }
     },
-    add() {},
-    sub() {},
+    add(step) {
+      this.$store.commit("add", step);
+    },
+    sub(step) {
+      this.$store.commit("sub", step);
+    },
     addToCart() {
       this.ballFlag = !this.ballFlag;
+      // 按钮先禁用
       this.btnFlag = true;
       setTimeout(() => {
+        // 再次把禁用效果取消
         this.btnFlag = false;
       }, 500);
     },
@@ -103,7 +116,7 @@ export default {
       // 移动的位置 = 目标位置  -  起点位置
       const xDist = badgePosition.left - ballPosition.left;
       const yDist = badgePosition.top - ballPosition.top;
-  
+
       this.xDist = xDist; //#endregion
       this.yDist = yDist;
     },
@@ -143,7 +156,7 @@ export default {
     top: 327px;
     left: 138px;
     z-index: 20;
-    transform: translate(97px, 294px);
+    opacity: 1;
   }
   .panel {
     width: 96%;

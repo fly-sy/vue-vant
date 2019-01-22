@@ -3,6 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
 
 import { Button, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Card,Tab, Tabs,Lazyload ,Stepper,Panel} from 'vant';
 Vue
@@ -56,6 +57,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   // components: { App },
   // template: '<App/>'
   render: c => c(App)
