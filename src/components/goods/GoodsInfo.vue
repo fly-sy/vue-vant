@@ -9,7 +9,7 @@
     </div>
     <!-- 购买区域 -->
     <div class="panel">
-      <h2 class="title">荣耀</h2>
+      <h2 class="title">{{goodsinfo.title}}</h2>
       <hr>
       <div class="panel-body">
         <div class="price-group">
@@ -103,12 +103,14 @@ export default {
       var goodsinfo = {
         id: this.id,
         count: this.value,
-        price: this.goodsinfo.sell_price,
+        sell_price: this.goodsinfo.sell_price,
         selected: true,
+        title: this.goodsinfo.title,
+        src: this.lunbotuList[0].src,
         timer: null
       };
       // 调用 store 中的 mutations 来将商品加入购物车
-      this.$store.commit("addToCar", goodsinfo);
+      this.$store.dispatch("addToCar", goodsinfo);
 
       this.ballFlag = !this.ballFlag;
       // // 按钮先禁用

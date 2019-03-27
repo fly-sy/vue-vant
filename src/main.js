@@ -8,7 +8,25 @@ import store from './store'
 import './common/rest.less'
 import './config/rem.js'
 
-import { Button, NavBar, Tabbar, TabbarItem, Swipe, SwipeItem, Card,Tab, Tabs,Lazyload ,Stepper,Panel,Switch } from 'vant';
+import {
+  Button,
+  NavBar,
+  Tabbar,
+  TabbarItem,
+  Swipe,
+  SwipeItem,
+  Card,
+  Tab,
+  Tabs,
+  Lazyload,
+  Stepper,
+  Panel,
+  Switch,
+  SubmitBar,
+  Checkbox,
+  CheckboxGroup,
+  Popup 
+} from 'vant';
 Vue
   .use(Button)
   .use(NavBar)
@@ -23,6 +41,9 @@ Vue
   .use(Stepper)
   .use(Panel)
   .use(Switch)
+  .use(SubmitBar)
+  .use(Checkbox).use(CheckboxGroup)
+  .use(Popup)
 
 
 // 引入 vue-resource  

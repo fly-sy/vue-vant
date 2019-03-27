@@ -22,6 +22,7 @@ import { Toast } from "vant";
 export default {
   data: () => ({
     comments: [],
+    // 默认显示第一页的内容
     pageindex: 1,
     houtainum: 7,
     msg: ""

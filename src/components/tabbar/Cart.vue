@@ -1,55 +1,70 @@
 <template>
   <div class="cart">
-    <div class="cart-group" v-for="good in goodslist" :key="good.id">
+    <div
+      class="cart-group"
+      v-for="good in $store.state.cart"
+      :key="good.id"
+    >
       <div class="cart-s">
-        <van-switch v-model="checked"/>
-      </div>
-      <div class="cart-p">
-        <van-card 
-          :num="2"
-          :price="good.sell_price"
-          :title="good.title"
-          :thumb="good.img_url"
+        <van-switch
+          v-model="good.selected"
+          size="20px"
         />
       </div>
+      <div class="cart-p">
+
+        <van-card
+          :num="good.count"
+          :price="good.sell_price"
+          :title="good.title"
+          :thumb="good.src"
+        >
+          <div slot="desc">
+            <van-stepper
+              v-model="good.count"
+              integer
+              class="number"
+            />
+          </div>
+        </van-card>
+      </div>
     </div>
+    <van-submit-bar
+      class="submit-bar"
+      :price="$store.getters.getAllPrice.allPrice * 100"
+      button-text="提交订单"
+      @submit="onSubmit"
+    >
+      <van-checkbox v-model="checked">全选</van-checkbox>
+    </van-submit-bar>
   </div>
 </template>
 
 <script>
 export default {
   data: () => ({
-    checked: true,
-    goodslist: []
+    checked: false,
+    goodslist: [],
+    flag: true
   }),
   created() {
-    this.getGoodsList();
+    // this.getGoodsList();
+    // console.log(this.$store.state.cart);
   },
   methods: {
-    async getGoodsList() {
-      // 1. 获取到 store 中所有的商品的Id，然后拼接出一个 用逗号分隔的 字符串
-      var idArr = [];
-      this.$store.state.cart.forEach(item => idArr.push(item.id));
-      // 如果 购物车中没有商品，则直接返回，不需要请求数据接口，否则会报错
-      if (idArr.length <= 0) {
-        return;
-      }
-      // 获取购物车商品列表
-      const {
-        data: { status, message }
-      } = await this.$http.get("api/goods/getshopcarlist/" + idArr.join(","));
-      if (status === 0) {
-        this.goodslist = message;
-        console.log(message)
-      }
-    }
+
+    onSubmit() {}
   }
 };
 </script>
 
 <style lang="less">
 .cart {
+  padding: 10px;
   .cart-group {
+    border: 1px solid pink;
+    margin-top: 10px;
+    box-shadow: 1px 1px 3px pink;
     display: flex;
     .cart-s {
       flex: 1;
@@ -58,7 +73,23 @@ export default {
       align-items: center;
     }
     .cart-p {
-      flex: 2;
+      flex: 4;
+    }
+    .van-stepper__minus,
+    .van-stepper__plus {
+      width: 28px;
+    }
+    .van-stepper {
+      margin-top: 10px;
+    }
+  }
+  .van-submit-bar {
+    position: relative;
+    margin-top: 10px;
+    border: 1px solid red;
+    box-sizing: border-box;
+    .van-checkbox__icon {
+      margin-left: 14px;
     }
   }
 }

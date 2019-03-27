@@ -3,14 +3,15 @@ import Vuex, { Store } from 'vuex'
 
 Vue.use(Vuex)
 
+// 避免获取不到数据 
 var cart = JSON.parse(localStorage.getItem('cart') || '[]')
 
 export default new Store({
   state: {
-    cart: cart
+    cart
   },
+  // 同步的操作 不能发送ajax  
   mutations: {
-
     addToCar(state, goodsinfo) { // 点击加入购物车，把商品信息，保存到 store 中的 car 上
       // 分析：
       // 1. 如果购物车中，之前就已经有这个对应的商品了，那么，只需要更新数量
@@ -34,6 +35,9 @@ export default new Store({
 
       // 当 更新 car 之后，把 car 数组，存储到 本地的 localStorage 中
       localStorage.setItem('cart', JSON.stringify(state.cart))
+    },
+    add(){
+      
     }
   },
 
@@ -46,5 +50,26 @@ export default new Store({
       })
       return c
     },
+    getAllPrice(state){
+      var o = {
+        count: 0 ,
+        allPrice: 0
+      }
+      state.cart.forEach(item => {
+        if(item.selected === true){
+          o.count += item.count 
+          o.allPrice += item.sell_price * item.count  
+        }
+      })
+      return o
+    }
+  },
+  // 异步操作 可以发送ajax
+  actions: {
+    // {commit} 是固定写法 用于调用 mutations 里面的函数   
+    addToCar({ commit }, goodsinfo) {
+      // 发送ajax 目的是为了把数据永久存在数据库中，方便下次换了一台电脑   
+      commit('addToCar', goodsinfo)
+    }
   }
 })

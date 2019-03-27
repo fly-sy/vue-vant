@@ -12,6 +12,7 @@
   "dependencies": {
     "animate.css": "^3.7.0",
     "axios": "^0.18.0",
+    "better-scroll": "^1.12.5",
     "lib-flexible": "^0.3.2",
     "moment": "^2.23.0",
     "px2rem-loader": "^0.1.9",
